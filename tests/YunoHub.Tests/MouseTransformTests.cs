@@ -1,3 +1,4 @@
+using Xunit;
 using YunoHub.Desktop.Core;
 using YunoHub.Desktop.Models;
 
