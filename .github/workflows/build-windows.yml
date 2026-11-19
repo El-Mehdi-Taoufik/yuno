@@ -25,6 +25,9 @@ jobs:
       - name: Restore
         run: dotnet restore src/YunoHub.Desktop/YunoHub.Desktop.csproj
 
+      - name: Run unit tests
+        run: dotnet test tests/YunoHub.Tests/YunoHub.Tests.csproj -c Release
+
       - name: Publish self-contained x64
         run: dotnet publish src/YunoHub.Desktop/YunoHub.Desktop.csproj -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -o artifacts/win-x64
 
