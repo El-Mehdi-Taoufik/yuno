@@ -50,7 +50,7 @@
             </Grid>
           </StackPanel>
         </Border>
-        <Grid ColumnDefinitions="*,*" ColumnSpacing="14" RowDefinitions="Auto,Auto">
+        <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,Auto">
           <Border Grid.Column="0" Background="#121A26" BorderBrush="#263449" BorderThickness="1" CornerRadius="12" Padding="18">
             <StackPanel Spacing="12">
               <TextBlock Text="Motion processing" Foreground="#F1F5FB" FontSize="16" FontWeight="SemiBold"/>
