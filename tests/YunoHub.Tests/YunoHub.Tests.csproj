@@ -15,6 +15,6 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="../YunoHub.Desktop/YunoHub.Desktop.csproj" />
+    <ProjectReference Include="../../src/YunoHub.Desktop/YunoHub.Desktop.csproj" />
   </ItemGroup>
 </Project>
