@@ -1,0 +1,114 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="YunoHub.Desktop.MainWindow"
+        Width="1120" Height="760" MinWidth="900" MinHeight="640"
+        Title="Yuno Hub" Background="#0B0E14"
+        WindowStartupLocation="CenterScreen">
+  <Grid ColumnDefinitions="220,*">
+    <Border Grid.Column="0" Background="#101620" Padding="22">
+      <StackPanel Spacing="18">
+        <StackPanel Spacing="2">
+          <TextBlock Text="YUNO" FontSize="25" FontWeight="Bold" Foreground="#F3F6FC"/>
+          <TextBlock Text="HUB  /  INPUT CONTROL" FontSize="10" Foreground="#7F8CA3"/>
+        </StackPanel>
+        <Border Height="1" Background="#273244" Margin="0,8"/>
+        <TextBlock Text="WORKSPACE" Foreground="#6F7F98" FontSize="10" FontWeight="Bold"/>
+        <Border Background="#1D2A3B" CornerRadius="8" Padding="12">
+          <TextBlock Text="◈   Dashboard" Foreground="#8CC8FF" FontWeight="SemiBold"/>
+        </Border>
+        <TextBlock Text="PROFILES" Foreground="#6F7F98" FontSize="10" FontWeight="Bold" Margin="0,16,0,0"/>
+        <TextBlock Text="Local JSON profiles" Foreground="#AAB5C7" FontSize="12"/>
+        <TextBlock Text="DEVICE" Foreground="#6F7F98" FontSize="10" FontWeight="Bold" Margin="0,16,0,0"/>
+        <TextBlock Text="Device discovery — next phase" Foreground="#AAB5C7" FontSize="12" TextWrapping="Wrap"/>
+        <Border VerticalAlignment="Bottom" Background="#151F2C" CornerRadius="8" Padding="12">
+          <StackPanel Spacing="4">
+            <TextBlock Text="BUILD STATUS" Foreground="#72839D" FontSize="10"/>
+            <TextBlock Text="Core preview" Foreground="#A7D8B5" FontWeight="SemiBold"/>
+            <TextBlock Text="Input backend is not active" Foreground="#8795AA" FontSize="10" TextWrapping="Wrap"/>
+          </StackPanel>
+        </Border>
+      </StackPanel>
+    </Border>
+    <ScrollViewer Grid.Column="1" Padding="30">
+      <StackPanel Spacing="20" MaxWidth="820">
+        <StackPanel Spacing="5">
+          <TextBlock Text="Mouse Dashboard" FontSize="28" FontWeight="Bold" Foreground="#F3F6FC"/>
+          <TextBlock Text="Tune the processing profile. Changes are stored locally and are not applied to system input yet." Foreground="#8997AB" TextWrapping="Wrap"/>
+        </StackPanel>
+        <Border Background="#121A26" BorderBrush="#263449" BorderThickness="1" CornerRadius="12" Padding="20">
+          <StackPanel Spacing="14">
+            <Grid ColumnDefinitions="*,Auto">
+              <StackPanel Spacing="3">
+                <TextBlock Text="Active profile" Foreground="#F1F5FB" FontSize="16" FontWeight="SemiBold"/>
+                <TextBlock x:Name="ProfileHint" Text="Current local configuration" Foreground="#8291A7" FontSize="11"/>
+              </StackPanel>
+              <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="8">
+                <TextBox x:Name="ProfileName" Width="150" Text="Default"/>
+                <Button Content="Save profile" Click="SaveProfile_Click"/>
+                <Button Content="Load" Click="LoadProfile_Click"/>
+              </StackPanel>
+            </Grid>
+          </StackPanel>
+        </Border>
+        <Grid ColumnDefinitions="*,*" ColumnSpacing="14" RowDefinitions="Auto,Auto">
+          <Border Grid.Column="0" Background="#121A26" BorderBrush="#263449" BorderThickness="1" CornerRadius="12" Padding="18">
+            <StackPanel Spacing="12">
+              <TextBlock Text="Motion processing" Foreground="#F1F5FB" FontSize="16" FontWeight="SemiBold"/>
+              <CheckBox x:Name="RippleToggle" Content="Ripple Control  —  micro movement smoothing"/>
+              <CheckBox x:Name="MotionSyncToggle" Content="Motion Sync  —  polling interval buffering"/>
+              <TextBlock Text="Angle Snapping strength" Foreground="#AAB6C8"/>
+              <Slider x:Name="AngleSnapSlider" Minimum="0" Maximum="1" Value="0" TickFrequency="0.05"/>
+              <TextBlock x:Name="AngleSnapValue" Text="0.00" Foreground="#8CC8FF"/>
+              <TextBlock Text="Acceleration / deceleration" Foreground="#AAB6C8"/>
+              <Slider x:Name="AccelerationSlider" Minimum="-1" Maximum="1" Value="0" TickFrequency="0.05"/>
+              <TextBlock x:Name="AccelerationValue" Text="0.00" Foreground="#8CC8FF"/>
+            </StackPanel>
+          </Border>
+          <Border Grid.Column="1" Background="#121A26" BorderBrush="#263449" BorderThickness="1" CornerRadius="12" Padding="18">
+            <StackPanel Spacing="12">
+              <TextBlock Text="Click brake" Foreground="#F1F5FB" FontSize="16" FontWeight="SemiBold"/>
+              <CheckBox x:Name="BrakeToggle" Content="Enable Y-axis brake while left click is held"/>
+              <TextBlock Text="Brake strength" Foreground="#AAB6C8"/>
+              <Slider x:Name="BrakeStrengthSlider" Minimum="0" Maximum="1" Value="0.6"/>
+              <TextBlock x:Name="BrakeStrengthValue" Text="0.60" Foreground="#8CC8FF"/>
+              <TextBlock Text="Brake delay (ms)" Foreground="#AAB6C8"/>
+              <Slider x:Name="BrakeDelaySlider" Minimum="20" Maximum="600" Value="200"/>
+              <TextBlock x:Name="BrakeDelayValue" Text="200 ms" Foreground="#8CC8FF"/>
+            </StackPanel>
+          </Border>
+          <Border Grid.Row="1" Grid.ColumnSpan="2" Background="#121A26" BorderBrush="#263449" BorderThickness="1" CornerRadius="12" Padding="18" Margin="0,14,0,0">
+            <StackPanel Spacing="12">
+              <TextBlock Text="Sensitivity and DPI scaling" Foreground="#F1F5FB" FontSize="16" FontWeight="SemiBold"/>
+              <Grid ColumnDefinitions="*,*,*,*">
+                <StackPanel Grid.Column="0" Spacing="5">
+                  <TextBlock Text="Sensitivity X" Foreground="#AAB6C8"/>
+                  <NumericUpDown x:Name="SensXInput" Minimum="0.1" Maximum="5" Increment="0.05" Value="1"/>
+                </StackPanel>
+                <StackPanel Grid.Column="1" Spacing="5" Margin="10,0,0,0">
+                  <TextBlock Text="Sensitivity Y" Foreground="#AAB6C8"/>
+                  <NumericUpDown x:Name="SensYInput" Minimum="0.1" Maximum="5" Increment="0.05" Value="1"/>
+                </StackPanel>
+                <StackPanel Grid.Column="2" Spacing="5" Margin="10,0,0,0">
+                  <TextBlock Text="DPI scale X" Foreground="#AAB6C8"/>
+                  <NumericUpDown x:Name="DpiXInput" Minimum="0.1" Maximum="5" Increment="0.05" Value="1"/>
+                </StackPanel>
+                <StackPanel Grid.Column="3" Spacing="5" Margin="10,0,0,0">
+                  <TextBlock Text="DPI scale Y" Foreground="#AAB6C8"/>
+                  <NumericUpDown x:Name="DpiYInput" Minimum="0.1" Maximum="5" Increment="0.05" Value="1"/>
+                </StackPanel>
+              </Grid>
+            </StackPanel>
+          </Border>
+        </Grid>
+        <StackPanel Orientation="Horizontal" Spacing="10">
+          <Button Content="Apply to preview" Click="Apply_Click" Background="#2677B9"/>
+          <Button Content="Reset defaults" Click="Reset_Click"/>
+          <TextBlock x:Name="StatusText" VerticalAlignment="Center" Foreground="#91A0B5" Text="Ready"/>
+        </StackPanel>
+        <Border Background="#211D15" BorderBrush="#51432B" BorderThickness="1" CornerRadius="8" Padding="12">
+          <TextBlock Text="Safety: this phase only edits and saves a local profile. No mouse hook, driver, registry edit, or boot setting is active." Foreground="#D9BD87" TextWrapping="Wrap" FontSize="11"/>
+        </Border>
+      </StackPanel>
+    </ScrollViewer>
+  </Grid>
+</Window>
