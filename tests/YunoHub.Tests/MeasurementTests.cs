@@ -1,3 +1,4 @@
+using Xunit;
 using YunoHub.Desktop.Core;
 
 namespace YunoHub.Tests;
